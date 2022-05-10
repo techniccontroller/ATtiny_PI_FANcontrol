@@ -8,7 +8,7 @@ import time
 
 i2caddress = 0x05
 hysteresis = 5
-target_temp = 60
+target_temp = 55
 fan_state = False
 
 i2cbus = SMBus(22)
@@ -63,9 +63,12 @@ def loop_cycle():
         myfile.write(message)
 
 def main():
+
+    turn_fan_off()
+
     while True:
         loop_cycle()
-        time.sleep(30)
+        time.sleep(15)
     
 if __name__ == "__main__":
     main()
