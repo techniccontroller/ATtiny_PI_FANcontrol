@@ -6,6 +6,7 @@ from datetime import datetime
 import os
 import time
 
+logfile = "temperature_log.txt"
 i2caddress = 0x05
 hysteresis = 5
 target_temp = 55
@@ -61,8 +62,17 @@ def loop_cycle():
     message = current_time + ": pi(" + str(pi_temp) + r"'C) attiny(" + str(attiny_temp) + "'C) -> " + str(fan_state)
     print(message)
     
-    with open("temperature_log.txt", "a") as myfile:
+    filesize = 0
+
+    with open(logfile, "a") as myfile:
         myfile.write(message + "\n")
+        filesize = myfile.tell()
+
+    if filesize > 10000:
+        print("filesize limit reached - clean file")
+        with open(logfile, "w") as myfile:
+            myfile.write(message + "\n")
+
 
 def main():
 
