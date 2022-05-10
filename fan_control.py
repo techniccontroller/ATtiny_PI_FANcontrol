@@ -32,15 +32,17 @@ def temperature_of_attiny():
     return float(highbyte * 256 + lowbyte - 275)
 
 def turn_fan_on():
+    global fan_state
     fan_state = True
     i2cbus.write_byte_data(i2caddress, 0x03, 0xff) # Set fan PWM to 255
 
 def turn_fan_off():
+    global fan_state
     fan_state = False
     i2cbus.write_byte_data(i2caddress, 0x03, 0x00) # Set fan PWM to 0   
 
 def loop_cycle():   
-    
+    global fan_state
     # Read temperatur of Raspberry Pi
     pi_temp = temperature_of_raspberry_pi()
 
