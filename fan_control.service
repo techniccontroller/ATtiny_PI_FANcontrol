@@ -1,0 +1,12 @@
+[Unit]
+Description=Fan Control Service
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/ATtiny_PI_FANcontrol
+ExecStart= /usr/bin/python /home/pi/ATtiny_PI_FANcontrol/fan_control.py
+
+[Install]
+WantedBy=multi-user.target
