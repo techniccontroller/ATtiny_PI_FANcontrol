@@ -62,7 +62,7 @@ def loop_cycle():
     print(message)
     
     with open("temperature_log.txt", "a") as myfile:
-        myfile.write(message)
+        myfile.write(message + "\n")
 
 def main():
 
